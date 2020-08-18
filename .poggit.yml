@@ -1,0 +1,11 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/AGTHARN/DiscordAlerts
+build-by-default: true
+branches:
+- master
+projects:
+  DiscordAlerts:
+    path: ""
+    libs:
+    - src: CortexPE\DiscordWebhookAPI\DiscordWebhookAPI
+      version: ^1.0.1
+...
