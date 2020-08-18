@@ -1,0 +1,95 @@
+# Thank you for installing the DiscordAlerts plugin!
+# This will take about 3-10 mins to set up. Please take your time.
+
+
+# CONFIG VERSION! (DO NOT CHANGE THIS VALUE)
+config-version: 1
+
+
+###[- WEBHOOK SETTINGS -]###
+
+# Webhooks allow this plugin to post messages in a Discord Channel with a URL!
+
+# The webhook URL can be gotten from the server integration feature on Discord.
+# More information from, https://support.discord.com/hc/en-us/articles/360045093012-Server-Integrations-Page
+# e.g. https://discordapp.com/api/webhooks/58927357892374/97DjfERKHfLx-4KySsdh ...
+webhook-url: ""
+
+# The name of the webhook bot. It can be any and doesn't matter.
+webhook-username: "DiscordAlerts"
+
+# The avatar/profile picture of the webhook bot. It only supports URL. (Leave empty for default)
+webhook-avatar-url: ""
+
+############################
+
+
+###[- TRIGGER WEBHOOK SETTINGS -]###
+
+# Choose what type of alerts you want to be sent!
+
+# Would you like the startup message/embed to be sent when the server starts?
+enable-startup-alert: true
+
+# Would you like the shutdown message/embed to be sent when the server stops?
+enable-shutdown-alert: true
+
+####################################
+
+
+###[- STARTUP MSG/EMBED SETTINGS -]###
+
+# The title/header of the message. This text will be on the top line.
+startup-message-title: ":white_check_mark: A Server has started !"
+
+# The image that will be used as the thumbnail of the message. (Leave empty if you do not want to use this)
+startup-thumbnail-url: ""
+
+# The color of the embed. Colors are represented via a 6-digit number.
+# You can generate a color with https://www.hexcolortool.com/
+startup-embed-color: "00FF00"
+
+
+# The title/header of the field text. (Leave empty if you do not want to use this)
+startup-embed-field-title: "NORMAL STARTUP"
+
+# The message of the field text. (Leave empty if you do not want to use this)
+startup-embed-field-message: "This was a normal startup."
+
+
+# The image that will be shown on the footer. (Leave empty if you do not want to use this)
+startup-footer-image-url: ""
+
+# The message that will be shown on the footer. (Leave empty if you do not want to use this)
+startup-footer-message: "Powered by DiscordAlerts"
+
+######################################
+
+
+###[- SHUTDOWN MSG/EMBED SETTINGS -]###
+
+# The title/header of the message. This text will be on the top line. (Leave empty if you do not want to use this)
+shutdown-message-title: ":white_check_mark: A Server has stopped !"
+
+# The image that will be used as the thumbnail of the message. (Leave empty if you do not want to use this)
+shutdown-thumbnail-url: ""
+
+# The color of the embed. Colors are represented via a 6-digit number.
+# You can generate a color with https://www.hexcolortool.com/
+shutdown-embed-color: "FF0000"
+
+
+# The title/header of the field text. (Leave empty if you do not want to use this)
+shutdown-embed-field-title: "NORMAL SHUTDOWN"
+
+# The message of the field text. (Leave empty if you do not want to use this)
+shutdown-embed-field-message: "This was a normal shutdown."
+
+
+# The image that will be shown on the footer. (Leave empty if you do not want to use this)
+shutdown-footer-image-url: ""
+
+# The message that will be shown on the footer. (Leave empty if you do not want to use this)
+shutdown-footer-message: "Powered by DiscordAlerts"
+
+#######################################
