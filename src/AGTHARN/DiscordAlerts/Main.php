@@ -78,7 +78,8 @@ class Main extends PluginBase implements Listener {
 
 		public function onPlayerKick(PlayerKickEvent $event) {
 			if ($event->getReason() === "Internal Server Error") {
-				$playername = $event->getPlayer();
+				$player = $event->getPlayer();
+				$playername = $player->getName();
 
 				if ($this->getConfig()->get("enable-internal-error-alert") === false) return;
 
@@ -99,6 +100,54 @@ class Main extends PluginBase implements Listener {
 
 				$webhook->send($msg);
 			}
+		}
+
+		public function onPlayerJoin(PlayerJoinEvent $event) {
+			$player = $event->getPlayer();
+			$playername = $player->getName();
+
+			if ($this->getConfig()->get("enable-join-alert") === false) return;
+
+				$webhook = new Webhook($this->getConfig()->get("webhook-url"));
+				$colorval = hexdec($this->getConfig()->get("join-embed-color"));
+
+				$msg = new Message();
+				$msg->setUsername($this->getConfig()->get("webhook-username"));
+				$msg->setAvatarURL($this->getConfig()->get("webhook-avatar-url"));
+
+				$embed = new Embed();
+				$embed->setTitle(str_replace("{name}", "$playername", $this->getConfig()->get("join-message-title")));
+				$embed->setColor($colorval);
+				$embed->addField(str_replace("{name}", "$playername", $this->getConfig()->get("join-embed-field-title")), str_replace("{name}", "$playername", $this->getConfig()->get("join-embed-field-message")));
+				$embed->setThumbnail($this->getConfig()->get("join-thumbnail-url"));
+				$embed->setFooter(str_replace("{name}", "$playername", $this->getConfig()->get("join-footer-message")), $this->getConfig()->get("join-footer-image-url"));
+				$msg->addEmbed($embed);
+
+				$webhook->send($msg);
+		}
+
+		public function onPlayerLeave(PlayerQuitEvent $event) {
+			$player = $event->getPlayer();
+			$playername = $player->getName();
+
+			if ($this->getConfig()->get("enable-leave-alert") === false) return;
+
+				$webhook = new Webhook($this->getConfig()->get("webhook-url"));
+				$colorval = hexdec($this->getConfig()->get("leave-embed-color"));
+
+				$msg = new Message();
+				$msg->setUsername($this->getConfig()->get("webhook-username"));
+				$msg->setAvatarURL($this->getConfig()->get("webhook-avatar-url"));
+
+				$embed = new Embed();
+				$embed->setTitle(str_replace("{name}", "$playername", $this->getConfig()->get("leave-message-title")));
+				$embed->setColor($colorval);
+				$embed->addField(str_replace("{name}", "$playername", $this->getConfig()->get("leave-embed-field-title")), str_replace("{name}", "$playername", $this->getConfig()->get("leave-embed-field-message")));
+				$embed->setThumbnail($this->getConfig()->get("leave-thumbnail-url"));
+				$embed->setFooter(str_replace("{name}", "$playername", $this->getConfig()->get("leave-footer-message")), $this->getConfig()->get("leave-footer-image-url"));
+				$msg->addEmbed($embed);
+
+				$webhook->send($msg);
 		}
 		
 		public function onDisable() {
