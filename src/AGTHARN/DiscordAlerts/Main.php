@@ -21,6 +21,9 @@
 namespace AGTHARN\DiscordAlerts;
 
 use pocketmine\plugin\PluginBase;
+use pocketmine\event\player\PlayerKickEvent;
+use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\Listener;
 use pocketmine\utils\Config;
 
@@ -32,11 +35,31 @@ class Main extends PluginBase implements Listener {
 		
 		public function onEnable() {
 			$this->getServer()->getPluginManager()->registerEvents($this, $this);
-			
-			// to do config version check
-			$configversion = $this->getConfig()->get("config-version");
+
+			if ($this->getConfig()->get("config-version") != "1") {
+				$this->getLogger()->warning("Your config is outdated! Please delete your old config to get the latest features! An alert has been sent to the webhook URL.");
+
+				$webhook = new Webhook($this->getConfig()->get("webhook-url"));
+				$colorval = hexdec("FF0000");
+
+				$msg = new Message();
+				$msg->setUsername($this->getConfig()->get("webhook-username"));
+				$msg->setAvatarURL($this->getConfig()->get("webhook-avatar-url"));
+
+				$embed = new Embed();
+				$embed->setTitle("OUTDATED CONFIG");
+				$embed->setColor($colorval);
+				$embed->addField("PLEASE UPDATE YOUR CONFIG", "Server has started but a plugin error has occurred. Please let the server owner know that their current config is outdated. Thank you.");
+				$embed->setThumbnail("https://user-images.githubusercontent.com/63234276/90614551-64307080-e23d-11ea-868a-c364ae8e9a37.png");
+				$embed->setFooter("OFFICIAL PLUGIN MESSAGE", "https://user-images.githubusercontent.com/63234276/90614551-64307080-e23d-11ea-868a-c364ae8e9a37.png");
+				$msg->addEmbed($embed);
+				$webhook->send($msg);
+
+				$this->getServer()->getPluginManager()->disablePlugin($this);
+			}
 			
 			if ($this->getConfig()->get("enable-startup-alert") === false) return;
+			if ($this->getConfig()->get("config-version") != "1") return;
 			
 			$webhook = new Webhook($this->getConfig()->get("webhook-url"));
 			$colorval = hexdec($this->getConfig()->get("startup-embed-color"));
@@ -55,9 +78,84 @@ class Main extends PluginBase implements Listener {
 			
 			$webhook->send($msg);
 		}
+
+		public function onPlayerKick(PlayerKickEvent $event) {
+			if ($event->getReason() === "Internal Server Error") {
+				$player = $event->getPlayer();
+				$playername = $player->getName();
+
+				if ($this->getConfig()->get("enable-internal-error-alert") === false) return;
+
+				$webhook = new Webhook($this->getConfig()->get("webhook-url"));
+				$colorval = hexdec($this->getConfig()->get("internal-error-embed-color"));
+
+				$msg = new Message();
+				$msg->setUsername($this->getConfig()->get("webhook-username"));
+				$msg->setAvatarURL($this->getConfig()->get("webhook-avatar-url"));
+
+				$embed = new Embed();
+				$embed->setTitle(str_replace("{name}", "$playername", $this->getConfig()->get("internal-error-message-title")));
+				$embed->setColor($colorval);
+				$embed->addField(str_replace("{name}", "$playername", $this->getConfig()->get("internal-error-embed-field-title")), str_replace("{name}", "$playername", $this->getConfig()->get("internal-error-embed-field-message")));
+				$embed->setThumbnail($this->getConfig()->get("internal-error-thumbnail-url"));
+				$embed->setFooter(str_replace("{name}", "$playername", $this->getConfig()->get("internal-error-footer-message")), $this->getConfig()->get("internal-error-footer-image-url"));
+				$msg->addEmbed($embed);
+
+				$webhook->send($msg);
+			}
+		}
+
+		public function onPlayerJoin(PlayerJoinEvent $event) {
+			$player = $event->getPlayer();
+			$playername = $player->getName();
+
+			if ($this->getConfig()->get("enable-join-alert") === false) return;
+
+				$webhook = new Webhook($this->getConfig()->get("webhook-url"));
+				$colorval = hexdec($this->getConfig()->get("join-embed-color"));
+
+				$msg = new Message();
+				$msg->setUsername($this->getConfig()->get("webhook-username"));
+				$msg->setAvatarURL($this->getConfig()->get("webhook-avatar-url"));
+
+				$embed = new Embed();
+				$embed->setTitle(str_replace("{name}", "$playername", $this->getConfig()->get("join-message-title")));
+				$embed->setColor($colorval);
+				$embed->addField(str_replace("{name}", "$playername", $this->getConfig()->get("join-embed-field-title")), str_replace("{name}", "$playername", $this->getConfig()->get("join-embed-field-message")));
+				$embed->setThumbnail($this->getConfig()->get("join-thumbnail-url"));
+				$embed->setFooter(str_replace("{name}", "$playername", $this->getConfig()->get("join-footer-message")), $this->getConfig()->get("join-footer-image-url"));
+				$msg->addEmbed($embed);
+
+				$webhook->send($msg);
+		}
+
+		public function onPlayerLeave(PlayerQuitEvent $event) {
+			$player = $event->getPlayer();
+			$playername = $player->getName();
+
+			if ($this->getConfig()->get("enable-leave-alert") === false) return;
+
+				$webhook = new Webhook($this->getConfig()->get("webhook-url"));
+				$colorval = hexdec($this->getConfig()->get("leave-embed-color"));
+
+				$msg = new Message();
+				$msg->setUsername($this->getConfig()->get("webhook-username"));
+				$msg->setAvatarURL($this->getConfig()->get("webhook-avatar-url"));
+
+				$embed = new Embed();
+				$embed->setTitle(str_replace("{name}", "$playername", $this->getConfig()->get("leave-message-title")));
+				$embed->setColor($colorval);
+				$embed->addField(str_replace("{name}", "$playername", $this->getConfig()->get("leave-embed-field-title")), str_replace("{name}", "$playername", $this->getConfig()->get("leave-embed-field-message")));
+				$embed->setThumbnail($this->getConfig()->get("leave-thumbnail-url"));
+				$embed->setFooter(str_replace("{name}", "$playername", $this->getConfig()->get("leave-footer-message")), $this->getConfig()->get("leave-footer-image-url"));
+				$msg->addEmbed($embed);
+
+				$webhook->send($msg);
+		}
 		
 		public function onDisable() {
 			if ($this->getConfig()->get("enable-shutdown-alert") === false) return;
+			if ($this->getConfig()->get("config-version") != "1") return;
 			
 			$webhook = new Webhook($this->getConfig()->get("webhook-url"));
 			$colorval = hexdec($this->getConfig()->get("shutdown-embed-color"));
