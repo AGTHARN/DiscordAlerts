@@ -1,6 +1,6 @@
-# DiscordAlerts [![HitCount](http://hits.dwyl.com/AGTHARN/DiscordAlerts/master.svg)](http://hits.dwyl.com/AGTHARN/DiscordAlerts/master) [![GitHub license](https://img.shields.io/github/license/AGTHARN/DiscordAlerts)](https://github.com/AGTHARN/DiscordAlerts/blob/master/LICENSE)
+# DiscordAlerts [![HitCount](http://hits.dwyl.com/AGTHARN/DiscordAlerts.svg)](http://hits.dwyl.com/AGTHARN/DiscordAlerts) [![GitHub license](https://img.shields.io/github/license/AGTHARN/DiscordAlerts)](https://github.com/AGTHARN/DiscordAlerts/blob/master/LICENSE)
 
-![DiscordAlertsLogo](https://user-images.githubusercontent.com/63234276/90501778-6fbd6200-e17f-11ea-98e6-0b4de743a1af.jpg)
+![DiscordAlertsLogo](https://user-images.githubusercontent.com/63234276/90614551-64307080-e23d-11ea-868a-c364ae8e9a37.png)
 
 ## THIS PLUGIN IS UNRELEASED AND IS STILL IN DEVELOPMENT
 
