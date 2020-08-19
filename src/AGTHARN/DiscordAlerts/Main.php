@@ -21,6 +21,9 @@
 namespace AGTHARN\DiscordAlerts;
 
 use pocketmine\plugin\PluginBase;
+use pocketmine\event\player\PlayerKickEvent;
+use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\Listener;
 use pocketmine\utils\Config;
 
