@@ -1,7 +1,6 @@
 # Thank you for installing the DiscordAlerts plugin!
 # This will take about 3-10 mins to set up. Please take your time.
 
-
 # CONFIG VERSION! (DO NOT CHANGE THIS VALUE)
 config-version: 1
 
@@ -33,6 +32,9 @@ enable-startup-alert: true
 
 # Would you like the shutdown message/embed to be sent when the server stops?
 enable-shutdown-alert: true
+
+# Would you like the Internal Error message/embed to be sent when a player gets kicked for Internal Server Error?
+enable-internal-error-alert: true
 
 ####################################
 
@@ -69,7 +71,7 @@ startup-footer-message: "Powered by DiscordAlerts"
 ###[- SHUTDOWN MSG/EMBED SETTINGS -]###
 
 # The title/header of the message. This text will be on the top line. (Leave empty if you do not want to use this)
-shutdown-message-title: ":white_check_mark: A Server has stopped !"
+shutdown-message-title: ":x: A Server has stopped !"
 
 # The image that will be used as the thumbnail of the message. (Leave empty if you do not want to use this)
 shutdown-thumbnail-url: ""
@@ -91,5 +93,36 @@ shutdown-footer-image-url: ""
 
 # The message that will be shown on the footer. (Leave empty if you do not want to use this)
 shutdown-footer-message: "Powered by DiscordAlerts"
+
+#######################################
+
+
+###[- INTERNAL SERVER ERROR MSG/EMBED SETTINGS -]###
+
+# Include {name} if you want the player's name to be included. (only works for text and not urls)
+
+# The title/header of the message. This text will be on the top line. (Leave empty if you do not want to use this)
+internal-error-message-title: ":x: Player, {name} has been kicked for Internal Server Error !"
+
+# The image that will be used as the thumbnail of the message. (Leave empty if you do not want to use this)
+internal-error-thumbnail-url: ""
+
+# The color of the embed. Colors are represented via a 6-digit number.
+# You can generate a color with https://www.hexcolortool.com/
+internal-error-embed-color: "FF0000"
+
+
+# The title/header of the field text. (Leave empty if you do not want to use this)
+internal-error-embed-field-title: "INTERNAL SERVER ERROR"
+
+# The message of the field text. (Leave empty if you do not want to use this)
+internal-error-embed-field-message: "This was an error caused by a plugin."
+
+
+# The image that will be shown on the footer. (Leave empty if you do not want to use this)
+internal-error-footer-image-url: ""
+
+# The message that will be shown on the footer. (Leave empty if you do not want to use this)
+internal-error-footer-message: "Powered by DiscordAlerts"
 
 #######################################
