@@ -14,9 +14,10 @@ These are the list of features in DiscordAlerts. If you have any suggestions for
 - [✔️] Send an alert message when the server starts or stops normally.
 - [✔️] Customisable messages and color on the embeds.
 - [✔️] Customisable Webhook username and avatar.
+- [✔️] Send an alert message when a player gets kicked for an Internal Server Error.
+- [✔️] Send an alert message when a player joins or leaves the server.
+- [❌] Send an alert message when a player moves to another level/world.
 - [❌] Send an alert message when the server crashes unexpectedly.
-- [❌] Send an alert message when a player gets kicked for an internal server error.
-- [❌] Send an alert message when a player joins or leaves the server.
 - [❌] Send an alert message if a player says a specific word.
 - [❌] Support APIs from other plugins to send an alert.
 - [❌] Multiple Webhooks with customisation.
