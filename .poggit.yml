@@ -8,4 +8,6 @@ projects:
     libs:
     - src: CortexPE/DiscordWebhookAPI/DiscordWebhookAPI
       version: ^1.0.1
+    lint:
+        phpstan: false
 ...
